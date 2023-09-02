@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
+import { wrap } from "module";
 
 const QuestionProfile = (props: any) => {
   const { quizData, submittedAnswers, currentQuestion } = props;
@@ -29,7 +30,11 @@ const QuestionProfile = (props: any) => {
               border = "2px solid #FF3366";
 
             return (
-              <Link to={`/quiz/${index}`} style={{ textDecoration: "none" }} key={quiz.id}>
+              <Link
+                to={`/quiz/${index}`}
+                style={{ textDecoration: "none" }}
+                key={quiz.id}
+              >
                 <Box
                   sx={{
                     color: color,
@@ -52,6 +57,32 @@ const QuestionProfile = (props: any) => {
           })}
       </Stack>
       <hr style={{ borderTop: "1px solid #f2f2f2" }} />
+      <Stack direction="row" gap={2} alignItems="center" flexWrap="wrap">
+        <Stack direction="row" alignItems="center">
+          <Box
+            sx={{
+              background: "#02E882",
+              width: "20px",
+              height: "20px",
+              borderRadius: "3px",
+              mr: 1,
+            }}
+          ></Box>
+          <Typography>Submitted</Typography>
+        </Stack>
+        <Stack direction="row" alignItems="center">
+          <Box
+            sx={{
+              background: "#f2f2f2",
+              width: "20px",
+              height: "20px",
+              borderRadius: "3px",
+              mr: 1,
+            }}
+          ></Box>
+          <Typography>Not Submitted</Typography>
+        </Stack>
+      </Stack>
     </Box>
   );
 };
