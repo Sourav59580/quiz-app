@@ -36,7 +36,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = ({ children }) => {
       {isSubmitted && <Navigate to="/report" replace={true} />}
       
 
-      <Header timeLeft={timeLeft} updateTimeLeft={updateTimeLeft} finishQuiz = {finishQuiz} dispatch={dispatch} clearPersistedData={clearPersistedData}/>
+      <Header timeLeft={timeLeft} updateTimeLeft={updateTimeLeft} finishQuiz = {finishQuiz} dispatch={dispatch} clearPersistedData={clearPersistedData} isSubmitted={isSubmitted}/>
       {children || <Outlet />}
     </Box>
   );

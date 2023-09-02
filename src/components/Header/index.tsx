@@ -6,7 +6,7 @@ import AppsIcon from "@mui/icons-material/Apps";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 const Header = (props: any) => {
-  const { timeLeft, updateTimeLeft, finishQuiz, dispatch, clearPersistedData } = props;
+  const { timeLeft, updateTimeLeft, finishQuiz, dispatch, clearPersistedData, isSubmitted } = props;
 
   const [minutes, setMinutes] = useState(timeLeft.minutes);
   const [seconds, setSeconds] = useState(timeLeft.seconds);
@@ -54,7 +54,7 @@ const Header = (props: any) => {
           <img src={Logo} alt="logo" loading="lazy" style={{ width: "75px" }} />
         </Box>
         <Box>
-          <Typography variant="h5" sx={{ fontWeight: 600 }}>{formattedMinutes}:{formattedSeconds}</Typography>
+         {!isSubmitted  && <Typography variant="h5" sx={{ fontWeight: 600 }}>{formattedMinutes}:{formattedSeconds}</Typography>}
         </Box>
         <Box>
           <Stack direction="row" alignItems="center">
