@@ -45,6 +45,7 @@ const quizSlice = createSlice({
     },
     finishQuiz: (state) => {
       state.isSubmitted = true;
+      state.timeLeft.minutes = 0;
       state.quizEnded = new Date().toString();
     },
     submitQuiz: (state, action) => {
