@@ -1,12 +1,26 @@
 import { FC, ReactNode, useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import { Box, Tooltip, Stack, Typography, IconButton, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import {
+  Box,
+  Tooltip,
+  Stack,
+  Typography,
+  IconButton,
+  Button,
+} from "@mui/material";
 import Logo from "../../assets/images/logo.png";
 import AppsIcon from "@mui/icons-material/Apps";
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
 const Header = (props: any) => {
-  const { timeLeft, updateTimeLeft, finishQuiz, dispatch, clearPersistedData, isSubmitted } = props;
+  const {
+    timeLeft,
+    updateTimeLeft,
+    finishQuiz,
+    dispatch,
+    clearPersistedData,
+    isSubmitted,
+  } = props;
 
   const [minutes, setMinutes] = useState(timeLeft.minutes);
   const [seconds, setSeconds] = useState(timeLeft.seconds);
@@ -15,7 +29,7 @@ const Header = (props: any) => {
     const interval = setInterval(() => {
       if (minutes === 0 && seconds === 0) {
         clearInterval(interval);
-        dispatch(finishQuiz()) // Stop the timer when it reaches zero
+        dispatch(finishQuiz()); // Stop the timer when it reaches zero
       } else {
         if (seconds === 0) {
           setMinutes(minutes - 1);
@@ -24,16 +38,15 @@ const Header = (props: any) => {
           setSeconds(seconds - 1);
         }
 
-        dispatch(updateTimeLeft({ timeLeft: {minutes, seconds} }));
+        dispatch(updateTimeLeft({ timeLeft: { minutes, seconds } }));
       }
     }, 1000);
 
     return () => clearInterval(interval); // Clean up the interval when the component unmounts
   }, [minutes, seconds]);
 
-
-  const formattedMinutes = minutes.toString().padStart(2, '0');
-  const formattedSeconds = seconds.toString().padStart(2, '0');
+  const formattedMinutes = minutes.toString().padStart(2, "0");
+  const formattedSeconds = seconds.toString().padStart(2, "0");
 
   return (
     <Box
@@ -54,17 +67,23 @@ const Header = (props: any) => {
           <img src={Logo} alt="logo" loading="lazy" style={{ width: "75px" }} />
         </Box>
         <Box>
-         {!isSubmitted  && <Typography variant="h5" sx={{ fontWeight: 600 }}>{formattedMinutes}:{formattedSeconds}</Typography>}
+          {!isSubmitted && (
+            <Typography variant="h5" sx={{ fontWeight: 600 }}>
+              {formattedMinutes}:{formattedSeconds}
+            </Typography>
+          )}
         </Box>
         <Box>
           <Stack direction="row" alignItems="center">
-            <Tooltip title="Dashboard">
-              <Link to="/dashboard">
-                <IconButton sx={{ mr: 2 }}>
-                  <AppsIcon />
-                </IconButton>
-              </Link>
-            </Tooltip>
+            {!isSubmitted && (
+              <Tooltip title="Dashboard">
+                <Link to="/dashboard">
+                  <IconButton sx={{ mr: 2 }}>
+                    <AppsIcon />
+                  </IconButton>
+                </Link>
+              </Tooltip>
+            )}
             <Box
               sx={{
                 width: "25px",
@@ -73,14 +92,15 @@ const Header = (props: any) => {
                 background: "#d7d7d7",
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               {/* <PersonOutlineIcon sx={{ fontSize: '18px'}}/> */}
             </Box>
 
-            <Button sx={{ ml: 2 }} onClick={clearPersistedData}>Logout</Button>
-            
+            <Button sx={{ ml: 2 }} onClick={clearPersistedData}>
+              Logout
+            </Button>
           </Stack>
         </Box>
       </Stack>
