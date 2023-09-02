@@ -29,7 +29,6 @@ const Report = () => {
         height: "calc(100vh - 58px)",
         overflow: "auto",
         marginTop: "0px",
-        border: "1px solid red",
       }}
     >
       {quizData &&

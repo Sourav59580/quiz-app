@@ -40,7 +40,7 @@ const quizSlice = createSlice({
   reducers: {
     startQuiz: (state, action) => {
        state.hasStarted = true;
-       state.timeLeft.minutes = 1;
+       state.timeLeft.minutes = 30;
        state.quizStarted = new Date().toString();
     },
     finishQuiz: (state) => {
